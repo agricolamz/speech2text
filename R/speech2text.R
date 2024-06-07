@@ -15,7 +15,6 @@
 #' @importFrom audio.whisper whisper
 #' @importFrom readr write_csv
 #'
-#'
 #' @export
 
 speech2text <- function(audio,
