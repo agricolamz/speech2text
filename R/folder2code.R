@@ -24,7 +24,8 @@ folder2code <- function(path = getwd(),
                         language = "ru",
                         speakers = "") {
 
-    data.frame(file = list.files(path)) |>
+    data.frame(file = list.files(path),
+               speaker = speakers) |>
       dplyr::mutate(ext = tools::file_ext(file),
                     output_name = stringr::str_remove(file, ext),
                     output_name = stringr::str_remove(output_name, "\\.")) |>
@@ -37,7 +38,7 @@ speech2text(audio = '{file}',
             output_name = '{output_name}',
             model_path = '{model_path}',
             language = '{language}',
-            speakers = '{speakers}')
+            speaker = '{speaker}')
 "
       )
 }
