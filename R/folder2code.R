@@ -7,7 +7,6 @@
 #' @param path character vector with the path to the file
 #' @param model_path character vector with the path to the downloded model.
 #' @param language character vector with the code for the language. See \code{audio.whisper::whisper_languages()} for the list of languages.
-#' @param TextGrid logical. Whether the code for TextGrid creation is needed.
 #' @param speakers character vector with the speakers for TextGrid creation function.
 #'
 #' @return writes a csv file with the annotation
@@ -23,67 +22,22 @@
 folder2code <- function(path = getwd(),
                         model_path,
                         language = "ru",
-                        TextGrid = FALSE,
-                        speakers) {
-  if (isFALSE(TextGrid)) {
+                        speakers = "") {
+
     data.frame(file = list.files(path)) |>
-      dplyr::mutate(
-        ext = tools::file_ext(file),
-        output_name = stringr::str_remove(file, ext),
-        output_name = stringr::str_remove(output_name, "\\.")
-      ) |>
-      dplyr::filter(
-        tolower(ext) %in% c(
-          "wav",
-          "wave",
-          "mp3",
-          "mp4",
-          "ape",
-          "m4a",
-          "flac",
-          "aiff",
-          "ogg"
-        )
-      ) |>
+      dplyr::mutate(ext = tools::file_ext(file),
+                    output_name = stringr::str_remove(file, ext),
+                    output_name = stringr::str_remove(output_name, "\\.")) |>
+      dplyr::filter(tolower(ext) %in% c("wav", "wave", "mp3", "mp4", "ape",
+                                        "m4a", "flac", "aiff", "ogg")) |>
       stringr::str_glue_data(
         "
 
 speech2text(path = '{file}',
             output_name = '{output_name}',
             model_path = '{model_path}',
-            language = '{language}')
+            language = '{language}',
+            speakers = '{speakers}')
 "
       )
-  } else {
-    data.frame(file = list.files(path), speaker = speakers) |>
-      dplyr::mutate(
-        ext = tools::file_ext(file),
-        output_name = stringr::str_remove(file, ext),
-        output_name = stringr::str_remove(output_name, "\\.")
-      ) |>
-      dplyr::filter(
-        tolower(ext) %in% c(
-          "wav",
-          "wave",
-          "mp3",
-          "mp4",
-          "ape",
-          "m4a",
-          "flac",
-          "aiff",
-          "ogg"
-        )
-      ) |>
-      stringr::str_glue_data(
-        "
-
-speech2text(path = '{file}',
-            output_name = '{output_name}',
-            model_path = '{model_path}',
-            language = '{language}')
-csv2TextGrid(name = '{output_name}', speaker = '{speaker}')
-
-"
-      )
-  }
 }
