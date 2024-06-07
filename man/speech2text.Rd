@@ -4,12 +4,7 @@
 \alias{speech2text}
 \title{Convert audio to the anotated .csv file}
 \usage{
-speech2text(
-  audio,
-  output_name = "output",
-  model_path = "/home/agricolamz/work/scripts/r/audio.whisper/ggml-large-v2.bin",
-  language = "ru"
-)
+speech2text(audio, output_name = "output", model_path, language = "ru")
 }
 \arguments{
 \item{audio}{character vector with the path to the file}

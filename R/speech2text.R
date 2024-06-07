@@ -20,7 +20,7 @@
 
 speech2text <- function(audio,
                         output_name = "output",
-                        model_path = "/home/agricolamz/work/scripts/r/audio.whisper/ggml-large-v2.bin",
+                        model_path,
                         language = "ru"){
 
   # convert to the format specs ---------------------------------------------
