@@ -25,7 +25,7 @@
 csv2TextGrid <- function(name, speaker = "speaker"){
 
   stringr::str_glue("{name}.csv") |>
-    readr::read_csv() ->
+    readr::read_csv(show_col_types = FALSE) ->
     df
 
   files <- list.files(pattern = name)
