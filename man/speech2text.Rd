@@ -4,7 +4,13 @@
 \alias{speech2text}
 \title{Convert audio to the anotated .csv file}
 \usage{
-speech2text(audio, output_name = "output", model_path, language = "ru")
+speech2text(
+  audio,
+  output_name = "output",
+  model_path,
+  language = "ru",
+  speaker = ""
+)
 }
 \arguments{
 \item{audio}{character vector with the path to the file}
@@ -14,6 +20,8 @@ speech2text(audio, output_name = "output", model_path, language = "ru")
 \item{model_path}{character vector with the path to the downloded model.}
 
 \item{language}{character vector with the code for the language. See \code{audio.whisper::whisper_languages()} for the list of languages.}
+
+\item{speaker}{character vector with the speaker name that is used as the tier name. \code{NULL} by default. If this argument is filled then TextGrid will be created.}
 }
 \value{
 writes a csv file with the annotation

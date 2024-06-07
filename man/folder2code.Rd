@@ -4,13 +4,7 @@
 \alias{folder2code}
 \title{Generate code for analysis of audio from the folder}
 \usage{
-folder2code(
-  path = getwd(),
-  model_path,
-  language = "ru",
-  TextGrid = FALSE,
-  speakers
-)
+folder2code(path = getwd(), model_path, language = "ru", speakers = "")
 }
 \arguments{
 \item{path}{character vector with the path to the file}
@@ -18,8 +12,6 @@ folder2code(
 \item{model_path}{character vector with the path to the downloded model.}
 
 \item{language}{character vector with the code for the language. See \code{audio.whisper::whisper_languages()} for the list of languages.}
-
-\item{TextGrid}{logical. Whether the code for TextGrid creation is needed.}
 
 \item{speakers}{character vector with the speakers for TextGrid creation function.}
 }
