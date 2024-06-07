@@ -33,7 +33,7 @@ folder2code <- function(path = getwd(),
       stringr::str_glue_data(
         "
 
-speech2text(path = '{file}',
+speech2text(audio = '{file}',
             output_name = '{output_name}',
             model_path = '{model_path}',
             language = '{language}',
