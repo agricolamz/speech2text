@@ -33,7 +33,7 @@ speech2text <- function(audio,
 
   model <- audio.whisper::whisper(model_path)
   result <- audio.whisper:::predict.whisper(model,
-                                            str_glue("{tmp}/{output_name}.wav"),
+                                            stringr::str_glue("{tmp}/{output_name}.wav"),
                                             language = language)
 
   # write down results ------------------------------------------------------
