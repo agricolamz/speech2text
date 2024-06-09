@@ -48,11 +48,13 @@ speech2text <- function(audio,
 
   result$params
   print(result$timing)
-  gc(verbose = FALSE)
   if(speaker != ""){
     csv2TextGrid(name = output_name, speaker = speaker)
   }
+
   if(restart_r_session){
     .rs.restartR()
+  } else {
+    gc(verbose = FALSE)
   }
 }
