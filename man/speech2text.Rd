@@ -9,8 +9,7 @@ speech2text(
   output_name = "output",
   model_path,
   language = "ru",
-  speaker = "",
-  restart_r_session = FALSE
+  speaker = ""
 )
 }
 \arguments{
@@ -23,8 +22,6 @@ speech2text(
 \item{language}{character vector with the code for the language. See \code{audio.whisper::whisper_languages()} for the list of languages.}
 
 \item{speaker}{character vector with the speaker name that is used as the tier name. \code{NULL} by default. If this argument is filled then TextGrid will be created.}
-
-\item{restart_r_session}{logical. Restarts R session in order to fully clean the memory/RAM.}
 }
 \value{
 writes a csv file with the annotation

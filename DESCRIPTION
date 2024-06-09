@@ -7,7 +7,7 @@ Maintainer: George Moroz <agricolamz@gmail.com>
 Description: Helping functions for working with audio.whisper. 
 Language: en-US
 License: GPL (>= 3)
-Imports: audio.whisper, stringr, readr, dplyr, phonfieldwork
+Imports: audio.whisper, stringr, readr, dplyr, phonfieldwork, job
 Encoding: UTF-8
 LazyData: true
 RoxygenNote: 7.3.1

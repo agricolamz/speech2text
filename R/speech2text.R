@@ -9,13 +9,13 @@
 #' @param model_path character vector with the path to the downloded model.
 #' @param language character vector with the code for the language. See \code{audio.whisper::whisper_languages()} for the list of languages.
 #' @param speaker character vector with the speaker name that is used as the tier name. \code{NULL} by default. If this argument is filled then TextGrid will be created.
-#' @param restart_r_session logical. Restarts R session in order to fully clean the memory/RAM.
 #'
 #' @return writes a csv file with the annotation
 #'
 #' @importFrom stringr str_glue
 #' @importFrom audio.whisper whisper
 #' @importFrom readr write_csv
+#' @importFrom job job
 #'
 #' @export
 
@@ -23,8 +23,9 @@ speech2text <- function(audio,
                         output_name = "output",
                         model_path,
                         language = "ru",
-                        speaker = "",
-                        restart_r_session = FALSE){
+                        speaker = ""){
+
+  job::job({
 
   # convert to the format specs ---------------------------------------------
   tmp <- tempdir()
@@ -52,9 +53,5 @@ speech2text <- function(audio,
     csv2TextGrid(name = output_name, speaker = speaker)
   }
 
-  if(restart_r_session){
-    .rs.restartR()
-  } else {
-    gc(verbose = FALSE)
-  }
+  })
 }
