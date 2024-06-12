@@ -30,8 +30,9 @@ csv2TextGrid <- function(name, speaker = "speaker"){
 
   files <- list.files(pattern = name)
 
-  file <- files[which(tools::file_ext(files) %in% c("WAV", "wav"))]
-
+  file <- files[which(tolower(tools::file_ext(files)) %in%
+                        c("wav", "wave", "mp3", "mp4", "ape",
+                          "m4a", "flac", "aiff", "ogg"))]
   file |>
     phonfieldwork::get_sound_duration() |>
     dplyr::pull(duration) ->

@@ -25,7 +25,7 @@ speech2text <- function(audio,
                         language = "ru",
                         speaker = ""){
 
-  job::job({
+  job::job(title = output_name, {
 
   # convert to the format specs ---------------------------------------------
   tmp <- tempdir()
