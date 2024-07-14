@@ -50,8 +50,8 @@ csv2TextGrid <- function(name, speaker = "speaker"){
     dplyr::mutate(content = stringr::str_replace_all(content, '"', "'"),
                   time_start = ifelse(time_start == 0,
                                       0,
-                                      as.double(time_start)+0.1),
-                  time_end = as.double(time_end)+0.1) |>
+                                      as.double(time_start)),
+                  time_end = as.double(time_end)) |>
     phonfieldwork::df_to_tier(textgrid = stringr::str_glue("{name}.TextGrid"),
                               tier_name = speaker)
 }
