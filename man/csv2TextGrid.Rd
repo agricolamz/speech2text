@@ -2,12 +2,12 @@
 % Please edit documentation in R/csv2TextGrid.R
 \name{csv2TextGrid}
 \alias{csv2TextGrid}
-\title{Convert audio to the anotated .csv file}
+\title{Convert .csv to the Praat TextGrid}
 \usage{
-csv2TextGrid(name, speaker = "speaker")
+csv2TextGrid(file, speaker = "speaker")
 }
 \arguments{
-\item{name}{character vector with the name of the .csv file}
+\item{file}{character vector with the name of the .csv file}
 
 \item{speaker}{character vector with the speaker name that is used as the tier name.}
 }
@@ -15,7 +15,7 @@ csv2TextGrid(name, speaker = "speaker")
 writes a csv file with the annotation
 }
 \description{
-Adds glosses to the glosses list and adds small capitals to glosses. Escapes strings that begins and ends with curly brackets.
+Convert .csv to the Praat TextGrid
 }
 \author{
 George Moroz <agricolamz@gmail.com>

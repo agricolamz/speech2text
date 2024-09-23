@@ -1,34 +1,35 @@
-#' Convert audio to the anotated .csv file
-#'
-#' Adds glosses to the glosses list and adds small capitals to glosses. Escapes strings that begins and ends with curly brackets.
+#' Convert .csv to the Praat TextGrid
 #'
 #' @author George Moroz <agricolamz@gmail.com>
 #'
-#' @param name character vector with the name of the .csv file
+#' @param file character vector with the name of the .csv file
 #' @param speaker character vector with the speaker name that is used as the tier name.
 #'
 #' @return writes a csv file with the annotation
 #'
 #' @importFrom stringr str_glue
+#' @importFrom readr read_csv
 #' @importFrom tools file_ext
 #' @importFrom phonfieldwork get_sound_duration
-#' @importFrom dplyr pull
 #' @importFrom phonfieldwork create_empty_textgrid
 #' @importFrom dplyr rename
 #' @importFrom dplyr select
 #' @importFrom dplyr mutate
+#' @importFrom dplyr pull
 #' @importFrom phonfieldwork df_to_tier
-#'
 #'
 #' @export
 
-csv2TextGrid <- function(name, speaker = "speaker"){
+csv2TextGrid <- function(file, speaker = "speaker"){
 
-  stringr::str_glue("{name}.csv") |>
+  file <- ifelse(stringr::str_ends(file, "\\.csv"),
+                 stringr::str_glue("{file}.csv"),
+                 file)
+  file |>
     readr::read_csv(show_col_types = FALSE) ->
     df
 
-  files <- list.files(pattern = name)
+  files <- list.files(pattern = file)
 
   file <- files[which(tolower(tools::file_ext(files)) %in%
                         c("wav", "wave", "mp3", "mp4", "ape",
@@ -41,7 +42,7 @@ csv2TextGrid <- function(name, speaker = "speaker"){
   phonfieldwork::create_empty_textgrid(duration,
                         tier_name = "Interviewer",
                         path = getwd(),
-                        result_file_name = name)
+                        result_file_name = file)
   df |>
     dplyr::rename(content = text,
                   time_start = from,
@@ -52,6 +53,6 @@ csv2TextGrid <- function(name, speaker = "speaker"){
                                       0,
                                       as.double(time_start)),
                   time_end = as.double(time_end)) |>
-    phonfieldwork::df_to_tier(textgrid = stringr::str_glue("{name}.TextGrid"),
+    phonfieldwork::df_to_tier(textgrid = stringr::str_glue("{file}.TextGrid"),
                               tier_name = speaker)
 }

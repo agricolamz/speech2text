@@ -50,7 +50,7 @@ speech2text <- function(audio,
   result$params
   print(result$timing)
   if(speaker != ""){
-    csv2TextGrid(name = output_name, speaker = speaker)
+    csv2TextGrid(file = output_name, speaker = speaker)
   }
 
   })
