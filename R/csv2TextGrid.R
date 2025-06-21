@@ -22,19 +22,18 @@
 
 csv2TextGrid <- function(file, speaker = "speaker"){
 
-  file <- ifelse(stringr::str_ends(file, "\\.csv"),
-                 file,
-                 stringr::str_glue("{file}.csv"))
-  file |>
+  file <- str_remove(file, "\\.csv")
+
+  stringr::str_glue("{file}.csv") |>
     readr::read_csv(show_col_types = FALSE) ->
     df
 
   files <- list.files(pattern = file)
 
-  file <- files[which(tolower(tools::file_ext(files)) %in%
+  audio <- files[which(tolower(tools::file_ext(files)) %in%
                         c("wav", "wave", "mp3", "mp4", "ape",
                           "m4a", "flac", "aiff", "ogg"))]
-  file |>
+  audio |>
     phonfieldwork::get_sound_duration() |>
     dplyr::pull(duration) ->
     duration
