@@ -23,8 +23,8 @@
 csv2TextGrid <- function(file, speaker = "speaker"){
 
   file <- ifelse(stringr::str_ends(file, "\\.csv"),
-                 stringr::str_glue("{file}.csv"),
-                 file)
+                 file,
+                 stringr::str_glue("{file}.csv"))
   file |>
     readr::read_csv(show_col_types = FALSE) ->
     df
